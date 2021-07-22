@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Container from '../../components/Container/Container';
 import moviesApi from '../../services/movieApi';
 import s from './HomePage.module.css';
 
