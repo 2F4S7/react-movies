@@ -1,0 +1,16 @@
+.nav {
+    display: flex;
+    padding: 0 40px;
+    align-items: center;
+    min-height: 80px;
+    background-color: #7e4545;
+    box-shadow: var(--boxShadow);
+}
+
+.Link {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: -15px;
+    padding-bottom: 40px;
+}

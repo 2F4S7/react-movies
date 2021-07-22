@@ -1,9 +1,6 @@
-const routes = {
+// eslint-disable-next-line import/no-anonymous-default-export
+export default {
   home: '/',
   movies: '/movies',
-  detailsMovies: '/movies/:movieId',
-  cast: '/movies/:movieId/cast',
-  reviews: '/movies/:movieId/reviews',
+  movieDetails: '/movies/:movieId',
 };
-
-export default routes;

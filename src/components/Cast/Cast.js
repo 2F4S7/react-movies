@@ -1,33 +1,61 @@
 import React, { Component } from 'react';
-import API from '../../service/apiServices';
+import Container from '../Container/Container';
+import movieApi from '../../services/movieApi';
+import PropTypes from 'prop-types';
 
-export default class Cast extends Component {
+class CastComponent extends Component {
   state = {
-    cast: [],
+    casts: [],
   };
 
-  componentDidMount() {
-    API.fetchMovieCast(this.props.movieId).then(cast =>
-      this.setState({ cast: cast }),
-    );
+  async componentDidMount() {
+    const movieId = this.props.match.params.movieId;
+    movieApi
+      .fetchMovieCast(movieId)
+      .then(({ cast }) => {
+        if (cast.length !== 0) {
+          this.setState({
+            casts: [...cast],
+          });
+        }
+      })
+      .catch(error => console.log(error));
   }
-
   render() {
-    const IMG_URL = 'https://image.tmdb.org/t/p/w300';
+    const { casts } = this.state;
+
     return (
-      <ul>
-        {this.state.cast.map(({ id, profile_path, name, character }) => (
-          <li key={id}>
-            <div>
-              <img src={`${IMG_URL}/${profile_path}`} alt={name} />
-              <div>
-                <h3>{name}</h3>
-                <p>{character}</p>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <Container>
+        <ul className="cast">
+          {casts.length ? (
+            casts.map(cast => (
+              <li key={cast.cast_id}>
+                {cast.profile_path ? (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                    alt="cast img"
+                  />
+                ) : (
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${cast.profile_path}`}
+                    alt="cast img"
+                  />
+                )}
+                <h3>{cast.name}</h3>
+                <p>Character: {cast.character}</p>
+              </li>
+            ))
+          ) : (
+            <h2>No actors to display</h2>
+          )}
+        </ul>
+      </Container>
     );
   }
 }
+
+CastComponent.propTypes = {
+  movieId: PropTypes.string,
+};
+
+export default CastComponent;
