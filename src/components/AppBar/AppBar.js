@@ -1,14 +1,10 @@
-import Container from '../Container/Container';
-import Navigation from '../Navigation/Navigation';
+import Navigation from '../Navigation';
+import styles from './AppBar.module.css';
 
-const AppBar = () => {
-  return (
-    <header>
-      <Container>
-        <Navigation />
-      </Container>
-    </header>
-  );
-};
+const AppBar = () => (
+  <header className={styles.AppBar}>
+    <Navigation />
+  </header>
+);
 
 export default AppBar;
